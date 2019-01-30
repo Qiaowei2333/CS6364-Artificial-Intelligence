@@ -1,0 +1,14 @@
+Rex!=Jack&Rex!=Peter&Rex!=Dan&Rex!=Earl.
+Jack!=Peter&Jack!=Dan&Jack!=Earl.
+Peter!=Dan&Peter!=Earl.
+Dan!=Earl.
+
+Said(Rex) -> -Steal(Earl)&-Steal(Rex).
+Said(Jack) -> Steal(Rex)|Steal(Peter).
+Said(Peter) -> -Said(Rex)&-Said(Jack).
+Said(Dan) -> (-Said(Peter)&Said(Rex)&-Said(Jack))|(-Said(Peter)&-Said(Rex)&Said(Jack)).
+Said(Earl) -> -Said(Dan).
+
+%Said(Rex)&Said(Jack)&Said(Earl)&-Said(Dan)&-Said(Peter).
+exists x (Steal(x)& all y ((y!=x) -> -Steal(y))).
+exists x exists y (-Said(x)&-Said(y)&x!=y & all z (z!=x&z!=y->Said(z))).
